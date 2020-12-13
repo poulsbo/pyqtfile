@@ -42,30 +42,30 @@ def main(argv):
 			keys = meta.find("keys")[0]
 			values = meta.find("ilst")[0]
 
-			print meta.parent
-			print indent + str(meta)
+			print(meta.parent)
+			print(indent + str(meta))
 
 			for namespace, key in keys['keys']:
-				print "%s%s:%s=%s" % (indent * 2, namespace, key, keys.find_metadata_value(namespace, key))
+				print("%s%s:%s=%s" % (indent * 2, namespace, key, keys.find_metadata_value(namespace, key)))
 
 
 	def dump_atoms(atoms, level=0):
 		indent = " "*4*level
 
 		for atom in atoms:
-			print indent + "%s" % (atom)
+			print(indent + "%s" % (atom))
 			if opts.fields:
-				for key, value in atom.fields.items():
-					if isinstance(value, str) or isinstance(value, unicode):
-						print indent + " | %s='%s'" % (key, value)
+				for key, value in list(atom.fields.items()):
+					if isinstance(value, str) or isinstance(value, str):
+						print(indent + " | %s='%s'" % (key, value))
 					else:
-						print indent + " | %s=%s" % (key, value)
+						print(indent + " | %s=%s" % (key, value))
 
 			dump_atoms(atom, level+1)
 
 
 	for qt_path in args[1:]:
-		print "[%s]" % (qt_path)
+		print("[%s]" % (qt_path))
 		qt = qtfile.QuickTimeFile(qt_path, atom_modules=[qtatoms])
 
 		if opts.metadata:

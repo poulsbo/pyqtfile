@@ -234,7 +234,7 @@ class Atom(list):
 				debug("End of file, stopped reading", "?", stream)
 				break
 
-			except QuickTimeParseError, e:
+			except QuickTimeParseError as e:
 				error(e.message, "?", stream)
 				error("Parse error, stopped reading", "?", stream)
 				break
@@ -353,16 +353,16 @@ class Atom(list):
 			self.fields[key] = value
 
 	def keys(self):
-		return self.fields.keys()
+		return list(self.fields.keys())
 
 	def values(self):
-		return self.fields.values()
+		return list(self.fields.values())
 
 	def items(self):
-		return self.fields.items()
+		return list(self.fields.items())
 
 	def has_key(self, key):
-		return self.fields.has_key(key)
+		return key in self.fields
 
 
 class PassthroughAtom(Atom):

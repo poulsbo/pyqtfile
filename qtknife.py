@@ -62,19 +62,19 @@ def main(argv):
 
 	for kind in strip_types:
 		for atom in qt.find(kind):
-			print "%s -> [free]" % (atom)
+			print("%s -> [free]" % (atom))
 			atom.free()
 
 	for kind in modify_types:
 		for atom in qt.find(kind):
-			print atom
+			print(atom)
 			for key, converter, value in [f.split(":") for f in fields]:
-				if atom.has_key(key):
+				if key in atom:
 					previous_value = atom[key]
 					atom[key] = converters.get(converter, str)(value)
-					print "| %s=%s -> %s" % (key, previous_value, value)
+					print("| %s=%s -> %s" % (key, previous_value, value))
 				else:
-					print "| %s (no such field)" % (key)
+					print("| %s (no such field)" % (key))
 
 	qt.write(target)
 	return 0

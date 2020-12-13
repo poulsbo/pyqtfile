@@ -305,10 +305,10 @@ class DataAtom(Atom):
 	field_defs = [("type", ">I"),
 	              ("locale", ">I")]
 
-	type_handlers = {1: (lambda d: unicode(d, 'utf8'),
+	type_handlers = {1: (lambda d: str(d, 'utf8'),
 						 lambda d: d,
 						 None),
-					 2: (lambda d: unicode(d, 'utf16'),
+					 2: (lambda d: str(d, 'utf16'),
 					   	 lambda d: d,
 					   	 None),
 					 21: (lambda d: struct.unpack(">i", d)[0],
